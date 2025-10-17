@@ -2,34 +2,34 @@ CREATE DATABASE IF NOT EXISTS movie_db;
 USE movie_db;
 
 CREATE TABLE IF NOT EXISTS publications (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL UNIQUE,
-  avatar VARCHAR(255) NOT NULL
+  name   VARCHAR(250) PRIMARY KEY,
+  avatar VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS reviewers (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  publication VARCHAR(255) NOT NULL,
-  avatar VARCHAR(255) NOT NULL,
-  CONSTRAINT fk_reviewers_publication FOREIGN KEY (publication)
+  name        VARCHAR(255) PRIMARY KEY,
+  publication VARCHAR(250) NOT NULL,
+  avatar      VARCHAR(250) NOT NULL,
+  CONSTRAINT fk_reviewers_publication
+    FOREIGN KEY (publication)
     REFERENCES publications(name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS movies (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  release_year INT NOT NULL,
-  score INT NOT NULL,
-  reviewer VARCHAR(255) NOT NULL,
-  publication VARCHAR(255) NOT NULL,
-  CONSTRAINT fk_movies_reviewer FOREIGN KEY (reviewer)
+  title       VARCHAR(250) PRIMARY KEY,
+  `release`   VARCHAR(250) NOT NULL,
+  score       INT NOT NULL,
+  reviewer    VARCHAR(255) NOT NULL,
+  publication VARCHAR(250) NOT NULL,
+  CONSTRAINT fk_movies_reviewer
+    FOREIGN KEY (reviewer)
     REFERENCES reviewers(name)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-  CONSTRAINT fk_movies_publication FOREIGN KEY (publication)
+  CONSTRAINT fk_movies_publication
+    FOREIGN KEY (publication)
     REFERENCES publications(name)
     ON UPDATE CASCADE
     ON DELETE CASCADE

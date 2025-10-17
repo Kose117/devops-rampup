@@ -28,7 +28,7 @@ app.get('/movies', async function (req, res) {
 
 app.get('/reviewers', async function (req, res) {
   try {
-    const rows = await pool.query('select r.name, r.publication, r.avatar from reviewers r')
+    const rows = await pool.query('select p.name, p.avatar from publications p')
     res.json(rows)
   } catch (err) {
     console.error('API Error:', err)
